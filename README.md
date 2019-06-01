@@ -1,13 +1,12 @@
 # rails_template_on_docker
 rails template on docker.
 
-# 初めにやったこと
+# initialize
 
 ## create files
 Dockerfile, docker-compose.yml, src/Gemfile, src/Gemfile.lock, mysql-confd/default_authentication.cnf
 
-* Gemfile, Gemfile.lockは初回のrails newを成功させるためのファイル
-* default_authentication.cnfはmysql8から導入された認証方式を旧方式に変更する設定ファイル
+* default_authentication.cnf is configuration file to change the authentication method introduced from mysql8 to the old method
 
 ## rails new
 ```
@@ -17,14 +16,14 @@ docker-compose run web rails new . --force --database=mysql
 ## create a user in mysql
 
 ```
-# container id 確認
+# check container id
 docker ps
-# mysqlコンテナへ接続
+# connect to mysql
 docker exec -it ${container id} /bin/bash
 
 # mysql cli
 mysql
-# デフォルトの認証方式を確認(mysql_native_passwordならOK)
+# check default authentication. (mysql_native_password is OK)
 show variables like 'default_authentication_plugin';
 # create user
 create user rails@"%" identified with mysql_native_password by 'rails_password';
@@ -45,17 +44,13 @@ vi src/config/database.yml
 docker-compose build
 ```
 
-## コンテナ起動
+## run container
 ```
 docker-compose up -d
 ```
 
-## create database
+## commands
 ```
+# create database
 docker-compose run web bundle exec rake db:create
-```
-ここでエラーが発生する。。。mysql上で同じくエリーを発行しても問題ないのになんだろう。。
-```
-rake aborted!
-ActiveRecord::StatementInvalid: Mysql2::Error::ConnectionError: Lost connection to MySQL server during query: SET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483
 ```
