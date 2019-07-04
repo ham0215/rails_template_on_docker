@@ -1,25 +1,18 @@
 version: '3'
 services:
-  # Rails
   web:
     build: .
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
-    # ローカルのsrcをコンテナにマウント
     volumes:
-      - ./src:/app/src
-    # コンテナの外部に3000番を公開
-    # 公開するポート番号：コンテナ内部の転送先ポート番号
+      - .:/app
     ports:
       - 3000:3000
-    # dbコンテナが先に起動するよう設定
     depends_on:
       - db
-    # pryを使用してデバッグができるよう設定
     tty: true
     stdin_open: true
-  # MySQL
   db:
-    image: mysql:8.0.15
+    image: mysql:8.0.16
     volumes:
       # Mysql8.0のデフォルトの認証形式をmysql_native_passwordに設定
       - ./mysql-confd:/etc/mysql/conf.d
