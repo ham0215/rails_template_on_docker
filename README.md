@@ -58,8 +58,6 @@ vi src/config/database.yml
 ```
 
 # commands
-
-# build
 ```
 # build
 docker-compose build
