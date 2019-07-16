@@ -47,7 +47,6 @@ show grants for rails@"%";
 $ docker-compose run web bash
 # rails new . --force --database=mysql --skip-test
 # bundle install
-# bundle exec rails webpacker:install
 ```
 
 ## edit database.yml
