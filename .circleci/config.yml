@@ -10,11 +10,8 @@ jobs:
           DB_HOST: 127.0.0.1
       - image: circleci/mysql:8.0.16
         environment:
+          MYSQL_USER: root
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          MYSQL_ROOT_PASSWORD: ''
-          MYSQL_USER: rails
-          MYSQL_PASSWORD: rails_password
-          MYSQL_ROOT_HOST: '%'
     steps:
       - checkout
       - restore_cache:
