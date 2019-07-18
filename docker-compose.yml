@@ -14,10 +14,10 @@ services:
   db:
     image: mysql:8.0.16
     volumes:
-      # Mysql8.0のデフォルトの認証形式をmysql_native_passwordに設定
+      # Mysql8.0のデフォルトの認証形式をmysql_native_passwordにする
       - ./mysql-confd:/etc/mysql/conf.d
       - db-volume:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
 volumes:
   db-volume:

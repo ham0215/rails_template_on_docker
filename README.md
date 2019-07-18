@@ -25,23 +25,6 @@ gem 'rails', '6.0.0.rc1'
 ### Gemfile.lock
 create empty file
 
-## create a user in mysql
-
-```
-# connect to mysql
-docker-compose exec db bash
-
-# mysql cli
-mysql -p
-# check default authentication. (mysql_native_password is OK)
-show variables like 'default_authentication_plugin';
-# create user
-create user rails@"%" identified with mysql_native_password by 'rails_password';
-select User, Plugin from mysql.user;
-grant ALL on *.* to rails@"%";
-show grants for rails@"%";
-```
-
 ## rails new
 ```
 $ docker-compose run web bash
@@ -67,9 +50,30 @@ docker-compose up -d
 # build and run containers in background
 docker-compose up --build -d
 
+# rspec install
+bundle exec rails g rspec:install
+
+# config install
+bundle exec rails g config:install
+
 # create database
 docker-compose exec web bundle exec rake db:create
 
 # migration
 docker-compose exec web bundle exec rake db:migrate
+
+# run rubocop. ruby2.6 does not support.
+docker-compose exec web bundle exec rubocop
+
+# run brakeman
+docker-compose exec web bundle exec brakeman -6 -A -w 1
+
+# run rails_best_practices
+docker-compose exec web bundle exec rails_best_practices .
+
+# run rspec
+docker-compose exec web bundle exec rspec
+
+# mysql
+docker-compose exec web mysql -h db --default-character-set=utf8
 ```
