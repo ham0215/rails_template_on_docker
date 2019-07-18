@@ -67,9 +67,27 @@ docker-compose up -d
 # build and run containers in background
 docker-compose up --build -d
 
+# rspec install
+bundle exec rails g rspec:install
+
+# config install
+bundle exec rails g config:install
+
 # create database
 docker-compose exec web bundle exec rake db:create
 
 # migration
 docker-compose exec web bundle exec rake db:migrate
+
+# run rubocop. ruby2.6 does not support.
+docker-compose exec web bundle exec rubocop
+
+# run brakeman
+docker-compose exec web bundle exec brakeman -6 -A -w 1
+
+# run rails_best_practices
+docker-compose exec web bundle exec rails_best_practices .
+
+# run rspec
+docker-compose exec web bundle exec rspec
 ```

@@ -1,0 +1,50 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/app
+    docker:
+      - image: circleci/ruby:2.6.3
+        environment:
+          RAILS_ENV: test
+          BUNDLER_VERSION: 2.0.2
+          DB_HOST: 127.0.0.1
+      - image: circleci/mysql:8.0.16
+        environment:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_ROOT_PASSWORD: ''
+          MYSQL_USER: rails
+          MYSQL_PASSWORD: rails_password
+          MYSQL_ROOT_HOST: '%'
+    steps:
+      - checkout
+      - restore_cache:
+          key: rails_template_on_docker-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: setup bundler
+          command: gem install bundler -v $BUNDLER_VERSION
+      - run:
+          name: install dependencies
+          command: |
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: rails_template_on_docker-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 1m
+      - run:
+          name: create db
+          command: bundle exec rake db:create
+      - run:
+          name: db migrate
+          command: bundle exec rake db:migrate
+      - run:
+          name: Breakman
+          command: bundle exec brakeman -6 -A -w 1
+      - run:
+          name: rails_best_practices
+          command: bundle exec rails_best_practices .
+      - run:
+          name: RSpec
+          command: bundle exec rspec
