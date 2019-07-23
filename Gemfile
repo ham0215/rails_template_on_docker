@@ -38,7 +38,7 @@ group :development, :test do
   gem 'bullet'
   gem 'license_finder'
   gem 'rails_best_practices'
-  #gem 'rubocop'
+  gem 'rubocop'
 
   gem 'pry-rails'
   gem 'pry-byebug'
