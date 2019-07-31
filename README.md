@@ -1,81 +1,24 @@
-# rails_template_on_docker
-rails template on docker.
+# README
 
-[![CircleCI](https://circleci.com/gh/ham0215/rails_template_on_docker.svg?style=svg)](https://circleci.com/gh/ham0215/rails_template_on_docker)
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-## ruby version
-2.6.3
+Things you may want to cover:
 
-## rails version
-6.0.0.rc1
+* Ruby version
 
-# initialize
+* System dependencies
 
-## create files
+* Configuration
 
-### Dockerfile, docker-compose.yml, mysql-confd/default_authentication.cnf
-refer to repository files.  
-default_authentication.cnf is configuration file to change the authentication method introduced from mysql8 to the old method.
+* Database creation
 
-### Gemfile
-```
-source 'https://rubygems.org'
+* Database initialization
 
-gem 'rails', '6.0.0.rc1'
-```
+* How to run the test suite
 
-### Gemfile.lock
-create empty file
+* Services (job queues, cache servers, search engines, etc.)
 
-## rails new
-```
-$ docker-compose run web bash
-# rails new . --force --database=mysql --skip-test
-# bundle install
-```
+* Deployment instructions
 
-## edit database.yml
-
-```
-# edit username, password, host
-vi src/config/database.yml
-```
-
-# commands
-```
-# build
-docker-compose build
-
-# run containers in background
-docker-compose up -d
-
-# build and run containers in background
-docker-compose up --build -d
-
-# rspec install
-bundle exec rails g rspec:install
-
-# config install
-bundle exec rails g config:install
-
-# create database
-docker-compose exec web bundle exec rake db:create
-
-# migration
-docker-compose exec web bundle exec rake db:migrate
-
-# run rubocop. ruby2.6 does not support.
-docker-compose exec web bundle exec rubocop
-
-# run brakeman
-docker-compose exec web bundle exec brakeman -6 -A -w 1
-
-# run rails_best_practices
-docker-compose exec web bundle exec rails_best_practices .
-
-# run rspec
-docker-compose exec web bundle exec rspec
-
-# mysql
-docker-compose exec web mysql -h db --default-character-set=utf8
-```
+* ...
