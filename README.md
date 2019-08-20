@@ -7,7 +7,7 @@ rails template on docker.
 2.6.3
 
 ## rails version
-6.0.0.rc1
+6.0.0
 
 # initialize
 
@@ -21,7 +21,7 @@ default_authentication.cnf is configuration file to change the authentication me
 ```
 source 'https://rubygems.org'
 
-gem 'rails', '6.0.0.rc1'
+gem 'rails', '6.0.0'
 ```
 
 ### Gemfile.lock
