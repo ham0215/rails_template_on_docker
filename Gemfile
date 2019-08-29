@@ -44,6 +44,7 @@ group :development, :test do
   gem 'pry-byebug'
 
   gem 'factory_bot_rails'
+  gem 'faker'
   gem 'rspec-rails'
 end
 
