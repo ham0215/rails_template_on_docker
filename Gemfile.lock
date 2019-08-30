@@ -58,7 +58,7 @@ GEM
       zeitwerk (~> 2.1, >= 2.1.8)
     ast (2.4.0)
     bindex (0.8.1)
-    bootsnap (1.4.4)
+    bootsnap (1.4.5)
       msgpack (~> 1.0)
     brakeman (4.6.1)
     builder (3.2.3)
