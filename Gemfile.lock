@@ -125,7 +125,7 @@ GEM
     jbuilder (2.9.1)
       activesupport (>= 4.2.0)
     json (2.2.0)
-    license_finder (5.10.1)
+    license_finder (5.10.2)
       bundler
       rubyzip
       thor
