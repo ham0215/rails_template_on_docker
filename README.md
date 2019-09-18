@@ -81,4 +81,7 @@ docker-compose exec web mysql -h db --default-character-set=utf8
 
 # edit credentials. env: production, development, test
 docker-compose exec web bundle exec rails credentials:edit --environment $env
+
+# assets precompile (RAILS_ENV is production)
+docker-compose exec web bundle exec rails assets:precompile
 ```
