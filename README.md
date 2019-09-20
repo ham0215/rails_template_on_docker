@@ -4,7 +4,7 @@ rails template on docker.
 [![CircleCI](https://circleci.com/gh/ham0215/rails_template_on_docker.svg?style=svg)](https://circleci.com/gh/ham0215/rails_template_on_docker)
 
 ## ruby version
-2.6.3
+2.6.4
 
 ## rails version
 6.0.0
@@ -64,7 +64,7 @@ docker-compose exec web bundle exec rake db:create
 # migration
 docker-compose exec web bundle exec rake db:migrate
 
-# run rubocop. ruby2.6 does not support.
+# run rubocop.
 docker-compose exec web bundle exec rubocop
 
 # run brakeman
