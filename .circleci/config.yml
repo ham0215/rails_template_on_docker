@@ -44,5 +44,8 @@ jobs:
           name: rails_best_practices
           command: bundle exec rails_best_practices .
       - run:
+          name: rubocop
+          command: bundle exec rubocop
+      - run:
           name: RSpec
           command: bundle exec rspec

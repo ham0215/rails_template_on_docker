@@ -266,9 +266,6 @@ GEM
     tilt (2.0.9)
     toml (0.2.0)
       parslet (~> 1.8.0)
-    turbolinks (5.2.1)
-      turbolinks-source (~> 5.2)
-    turbolinks-source (5.2.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     unicode-display_width (1.6.0)
@@ -314,13 +311,12 @@ DEPENDENCIES
   sass-rails
   spring
   spring-watcher-listen
-  turbolinks
   tzinfo-data
   web-console
   webpacker
 
 RUBY VERSION
-   ruby 2.6.3p62
+   ruby 2.6.4p104
 
 BUNDLED WITH
    2.0.2

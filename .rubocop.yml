@@ -14,15 +14,6 @@ AllCops:
 
   DisplayCopNames: true
 
-Rails:
-  Enabled: true
-
-Rails/UnknownEnv:
-  Environments:
-    - production
-    - development
-    - test
-
 #################### Layout ################################
 
 Layout/ClassStructure:
@@ -35,14 +26,14 @@ Layout/ExtraSpacing:
   Exclude:
     - "db/migrate/*.rb"
 
-Layout/IndentArray:
+Layout/IndentFirstArrayElement:
   EnforcedStyle: consistent
 
-Layout/IndentHash:
+Layout/IndentFirstHashElement:
   EnforcedStyle: consistent
 
 Layout/IndentationConsistency:
-  EnforcedStyle: rails
+  EnforcedStyle: indented_internal_methods
 
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented_relative_to_receiver
@@ -134,11 +125,6 @@ Naming/PredicateName:
     - have_
 
 Naming/UncommunicativeMethodParamName:
-  Enabled: false
-
-#################### Performance ###########################
-
-Performance/Casecmp:
   Enabled: false
 
 #################### Security ##############################
