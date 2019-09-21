@@ -33,7 +33,7 @@ Layout/IndentFirstHashElement:
   EnforcedStyle: consistent
 
 Layout/IndentationConsistency:
-  EnforcedStyle: indented_internal_methods
+  EnforcedStyle: normal
 
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented_relative_to_receiver
