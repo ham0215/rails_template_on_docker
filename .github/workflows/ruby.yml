@@ -10,12 +10,10 @@ jobs:
     services:
       db:
         image: mysql:8.0.16
-        volumes:
-          # Mysql8.0のデフォルトの認証形式をmysql_native_passwordにする
-          - ./mysql-confd:/etc/mysql/conf.d
-          - db-volume:/var/lib/mysql
-        env:
-          MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+        command: --default-authentication-plugin=mysql_native_password
+        environment:
+          MYSQL_USER: root
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
     steps:
     - uses: actions/checkout@v1
     - name: apt-get yarn
