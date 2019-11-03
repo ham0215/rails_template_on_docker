@@ -9,10 +9,8 @@ jobs:
       image: ruby:2.6.5
     services:
       db:
-        image: mysql:8.0.16
-        command: --default-authentication-plugin=mysql_native_password
-        environment:
-          MYSQL_USER: root
+        image: mysql:5.7.27
+        env:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
     steps:
     - uses: actions/checkout@v1
