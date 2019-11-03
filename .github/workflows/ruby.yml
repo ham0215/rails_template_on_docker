@@ -19,10 +19,24 @@ jobs:
         curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
         echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
         apt-get update && apt-get install -y yarn
+    - name: Cache gems
+      uses: actions/cache@preview
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gem-
+    - name: Cache node modules
+      uses: actions/cache@preview
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
     - name: bundle install
       run: |
         gem install bundler
-        bundle install --jobs 4 --retry 3
+        bundle install --jobs 4 --retry 3 --path vendor/bundle
     - name: yarn install
       run:  yarn install --check-files
     - name: migration
