@@ -35,7 +35,6 @@ group :development, :test do
   gem 'brakeman'
   gem 'bullet'
   gem 'license_finder'
-  gem 'rails_best_practices'
   gem 'rubocop'
 
   gem 'pry-rails'

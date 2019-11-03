@@ -1,0 +1,83 @@
+name: Ruby
+
+on: [push]
+
+jobs:
+  rspec:
+    runs-on: ubuntu-latest
+    container:
+      image: ruby:2.6.3
+    services:
+      db:
+        image: mysql:5.7.27
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    steps:
+    - uses: actions/checkout@v1
+    - name: apt-get yarn
+      run: |
+        curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+        echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+        apt-get update && apt-get install -y yarn
+    - name: bundle install
+      run: |
+        gem install bundler
+        bundle install --jobs 4 --retry 3
+    - name: yarn install
+      run:  yarn install --check-files
+    - name: migration
+      run: |
+        bundle exec rake db:create
+        bundle exec rake db:migrate
+    - name: run rspec
+      run: bundle exec rspec
+
+  rubocop:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Ruby 2.6
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.6.x
+    - name: run rubocop
+      run: |
+        gem install rubocop
+        rubocop
+
+  brakeman:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Ruby 2.6
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.6.x
+    - name: run brakeman
+      run: |
+        gem install brakeman
+        brakeman -6 -A -w 1
+      
+  success_notify:
+    needs: [rspec, rubocop, brakeman]
+    runs-on: ubuntu-latest
+    steps:
+    - name: slack notify
+      uses: rtCamp/action-slack-notify@master
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_MESSAGE: 'Post Content :rocket:'
+        SLACK_CHANNEL: ci
+
+  failure_notify:
+    if: failure()
+    needs: [rspec, rubocop, brakeman]
+    runs-on: ubuntu-latest
+    steps:
+    - name: slack notify
+      uses: rtCamp/action-slack-notify@master
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_MESSAGE: 'Post Content :rocket:'
+        SLACK_CHANNEL: ci
+        SLACK_COLOR: '#FF0000'
