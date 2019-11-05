@@ -3,6 +3,8 @@ rails template on docker.
 
 [![CircleCI](https://circleci.com/gh/ham0215/rails_template_on_docker.svg?style=svg)](https://circleci.com/gh/ham0215/rails_template_on_docker)
 
+![](https://github.com/ham0215/rails_template_on_docker/workflows/Ruby/badge.svg)
+
 ## ruby version
 2.6.5
 
