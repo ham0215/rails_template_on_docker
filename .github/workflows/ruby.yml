@@ -7,13 +7,14 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RAILS_ENV: test
-      DB_HOST: localhost
+      DB_HOST: 127.0.0.1
+      DB_PORT: 33060
     services:
       db:
         image: mysql:5.7.27
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
         ports:
-          - 3306:3306
+          - 33060:3306
         env:
           MYSQL_USER: root
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
