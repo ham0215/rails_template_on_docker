@@ -16,6 +16,10 @@ jobs:
       uses: actions/setup-ruby@v1
       with:
         ruby-version: 2.6.x
+    - name: apt-get
+      run: |
+        sudo apt-get update && sudo apt-get install
+        sudo apt-get install libmysqlclient-dev
     - name: Cache gems
       uses: actions/cache@preview
       with:
