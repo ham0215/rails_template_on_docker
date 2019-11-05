@@ -5,6 +5,8 @@ on: [push]
 jobs:
   rspec:
     runs-on: ubuntu-latest
+    env:
+      DB_HOST: 127.0.0.1
     services:
       db:
         image: mysql:5.7.27
@@ -18,7 +20,7 @@ jobs:
         ruby-version: 2.6.x
     - name: apt-get
       run: |
-        sudo apt-get update && sudo apt-get install
+        sudo apt-get update
         sudo apt-get install libmysqlclient-dev
     - name: Cache gems
       uses: actions/cache@preview
