@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RAILS_ENV: test
-      DB_HOST: localhost
+      DB_HOST: 127.0.0.1
       DB_PORT: 33060
     services:
       db:
