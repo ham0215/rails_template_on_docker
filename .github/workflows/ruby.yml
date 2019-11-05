@@ -6,11 +6,13 @@ jobs:
   rspec:
     runs-on: ubuntu-latest
     env:
+      RAILS_ENV: test
       DB_HOST: 127.0.0.1
     services:
       db:
         image: mysql:5.7.27
         env:
+          MYSQL_USER: root
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
     steps:
     - uses: actions/checkout@v1
