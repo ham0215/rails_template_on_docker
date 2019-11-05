@@ -21,6 +21,5 @@ services:
       - db-volume:/var/lib/mysql
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-      BIND-ADDRESS: 0.0.0.0
 volumes:
   db-volume:
