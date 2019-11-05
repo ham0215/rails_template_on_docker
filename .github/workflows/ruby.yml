@@ -1,6 +1,12 @@
 name: Ruby
 
-on: [push]
+on:
+  push:
+    paths-ignore:
+      - README.md
+      - docs/**
+      - Dockerfile
+      - docker-compose.yml
 
 jobs:
   rspec:
