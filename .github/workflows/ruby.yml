@@ -25,6 +25,9 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install libmysqlclient-dev
+    - name: test connection
+      run: mysql -h 127.0.0.1 -u root -e 'CREATE DATABASE IF NOT EXISTS app_test;'
+
     - name: Cache gems
       uses: actions/cache@preview
       with:
