@@ -72,7 +72,7 @@ jobs:
     - name: run rubocop
       run: |
         gem install rubocop
-        rubocop --format json
+        rubocop
 
   brakeman:
     runs-on: ubuntu-latest
