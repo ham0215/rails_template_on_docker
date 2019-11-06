@@ -1,0 +1,112 @@
+name: Ruby
+
+on:
+  push:
+    paths-ignore:
+      - README.md
+      - docs/**
+      - Dockerfile
+      - docker-compose.yml
+
+jobs:
+  rspec:
+    runs-on: ubuntu-latest
+    env:
+      RAILS_ENV: test
+      DB_HOST: 127.0.0.1
+      DB_PORT: 33060
+    services:
+      db:
+        image: mysql:5.7.27
+        ports:
+          - 33060:3306
+        env:
+          MYSQL_USER: root
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          BIND-ADDRESS: 0.0.0.0
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Ruby 2.6
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.6.x
+    - name: apt-get
+      run: |
+        sudo apt-get update
+        sudo apt-get install libmysqlclient-dev
+    - name: Cache gems
+      uses: actions/cache@preview
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gem-
+    - name: Cache node modules
+      uses: actions/cache@preview
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+    - name: bundle install
+      run: |
+        gem install bundler
+        bundle install --jobs 4 --retry 3 --path vendor/bundle
+    - name: yarn install
+      run:  yarn install --check-files
+    - name: migration
+      run: |
+        bundle exec rake db:create
+        bundle exec rake db:migrate
+    - name: run rspec
+      run: bundle exec rspec
+
+  rubocop:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Ruby 2.6
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.6.x
+    - name: run rubocop
+      run: |
+        gem install rubocop
+        rubocop
+
+  brakeman:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Ruby 2.6
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.6.x
+    - name: run brakeman
+      run: |
+        gem install brakeman
+        brakeman -6 -A -w 1
+      
+  success_notify:
+    needs: [rspec, rubocop, brakeman]
+    runs-on: ubuntu-latest
+    steps:
+    - name: slack notify
+      uses: rtCamp/action-slack-notify@master
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_MESSAGE: 'Post Content :rocket:'
+        SLACK_CHANNEL: ci
+
+  failure_notify:
+    if: failure()
+    needs: [rspec, rubocop, brakeman]
+    runs-on: ubuntu-latest
+    steps:
+    - name: slack notify
+      uses: rtCamp/action-slack-notify@master
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_MESSAGE: 'Post Content :rocket:'
+        SLACK_CHANNEL: ci
+        SLACK_COLOR: '#FF0000'

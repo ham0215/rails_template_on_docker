@@ -41,9 +41,6 @@ jobs:
           name: Breakman
           command: bundle exec brakeman -6 -A -w 1
       - run:
-          name: rails_best_practices
-          command: bundle exec rails_best_practices .
-      - run:
           name: rubocop
           command: bundle exec rubocop
       - run:
