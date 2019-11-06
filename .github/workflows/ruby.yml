@@ -57,7 +57,7 @@ jobs:
     - name: migration
       run: |
         bundle exec rake db:create
-        bundle exec rake db:migrate
+        bundle exec rake db:test:prepare
     - name: run rspec
       run: bundle exec rspec
 
