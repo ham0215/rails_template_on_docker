@@ -25,6 +25,7 @@ RUN gem update bundler
 RUN bundle install
 COPY . .
 RUN yarn install --check-files
+RUN RUN bundle exec rails assets:precompile
 
 RUN rm -f /app/tmp/pids/server.pid
 
