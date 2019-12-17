@@ -26,10 +26,10 @@ Layout/ExtraSpacing:
   Exclude:
     - "db/migrate/*.rb"
 
-Layout/IndentFirstArrayElement:
+Layout/FirstArrayElementIndentation:
   EnforcedStyle: consistent
 
-Layout/IndentFirstHashElement:
+Layout/FirstHashElementIndentation:
   EnforcedStyle: consistent
 
 Layout/IndentationConsistency:
@@ -50,7 +50,7 @@ Lint/AmbiguousBlockAssociation:
 Lint/EmptyWhen:
   Enabled: false
 
-Lint/HandleExceptions:
+Lint/SuppressedException:
   Enabled: false
 
 Lint/InheritException:
@@ -117,14 +117,14 @@ Metrics/PerceivedComplexity:
 
 # has_ から始まるメソッドは許可する
 Naming/PredicateName:
-  NamePrefixBlacklist:
+  ForbiddenPrefixes:
     - is_
   NamePrefix:
     - is_
     - has_
     - have_
 
-Naming/UncommunicativeMethodParamName:
+Naming/MethodParameterName:
   Enabled: false
 
 #################### Security ##############################
