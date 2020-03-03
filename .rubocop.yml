@@ -96,7 +96,7 @@ Metrics/ClassLength:
 Metrics/CyclomaticComplexity:
   Max: 10
 
-Metrics/LineLength:
+Layout/LineLength:
   Max: 160
   Exclude:
     - "db/migrate/*.rb"
@@ -148,9 +148,6 @@ Style/BlockDelimiters:
   Exclude:
     - "spec/**/*_spec.rb"
 
-Style/BracesAroundHashParameters:
-  Enabled: false
-
 Style/ClassAndModuleChildren:
   Enabled: false
 
@@ -190,6 +187,15 @@ Style/GuardClause:
 
 Style/HashSyntax:
   Enabled: false
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
 
 Style/IfInsideElse:
   Enabled: false

@@ -159,7 +159,7 @@ GEM
     nokogiri (1.10.7)
       mini_portile2 (~> 2.4.0)
     parallel (1.19.1)
-    parser (2.7.0.1)
+    parser (2.7.0.4)
       ast (~> 2.4.0)
     parslet (1.8.2)
     pry (0.12.2)
@@ -211,6 +211,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
+    rexml (3.2.4)
     rspec-core (3.9.0)
       rspec-support (~> 3.9.0)
     rspec-expectations (3.9.0)
@@ -228,11 +229,12 @@ GEM
       rspec-mocks (~> 3.9.0)
       rspec-support (~> 3.9.0)
     rspec-support (3.9.0)
-    rubocop (0.79.0)
+    rubocop (0.80.1)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
       parser (>= 2.7.0.1)
       rainbow (>= 2.2.2, < 4.0)
+      rexml
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 1.7)
     ruby-progressbar (1.10.1)
@@ -265,7 +267,7 @@ GEM
       parslet (~> 1.8.0)
     tzinfo (1.2.6)
       thread_safe (~> 0.1)
-    unicode-display_width (1.6.0)
+    unicode-display_width (1.6.1)
     uniform_notifier (1.13.0)
     web-console (4.0.1)
       actionview (>= 6.0.0)
@@ -314,4 +316,4 @@ DEPENDENCIES
   webpacker
 
 BUNDLED WITH
-   2.1.0
+   2.1.4
