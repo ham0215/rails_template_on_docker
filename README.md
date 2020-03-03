@@ -9,7 +9,7 @@ rails template on docker.
 2.6.5
 
 ## rails version
-6.0.0
+6.0.2.1
 
 # initialize
 
