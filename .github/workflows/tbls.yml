@@ -1,0 +1,55 @@
+name: Tbls
+
+on:
+  push:
+    branches:
+      - 'feature/*'
+
+jobs:
+  tbls:
+    runs-on: ubuntu-latest
+    env:
+      RAILS_ENV: test
+      DB_HOST: 127.0.0.1
+      DB_PORT: 33060
+    services:
+      db:
+        image: mysql:5.7.10
+        ports:
+          - 33060:3306
+        env:
+          MYSQL_USER: root
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          BIND-ADDRESS: 0.0.0.0
+    steps:
+      - uses: actions/checkout@v2.0.0
+      - name: Set up Ruby 2.6
+        uses: actions/setup-ruby@v1.0.2
+        with:
+          ruby-version: 2.6.x
+      - name: apt-get
+        run: |
+          sudo apt-get update
+          sudo apt-get install libmysqlclient-dev jq
+      - name: Cache gems
+        uses: actions/cache@v1.1.2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+      - name: bundle install
+        run: |
+          gem install bundler
+          bundle install --jobs 4 --retry 3 --path vendor/bundle
+      - name: migration
+        run: |
+          bundle exec rake db:create
+          bundle exec rake db:test:prepare
+      - name: tbls diff
+        uses: docker://k1low/tbls:latest
+        env:
+          TBLS_DSN: mysql://root:@db:3306/app_test
+          TBLS_DOC_PATH: docs/tables
+        with:
+          args: diff

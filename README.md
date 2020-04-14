@@ -87,3 +87,15 @@ docker-compose exec web bundle exec rails credentials:edit --environment $env
 # assets precompile (RAILS_ENV is production)
 docker-compose exec web bundle exec rails assets:precompile
 ```
+
+# テーブル定義
+
+https://github.com/ham0215/rails_template_on_docker/tree/develop/docs/tables/README.md
+
+## 生成方法
+
+```
+docker-compose run --rm tbls doc --force
+```
+
+ref: https://github.com/k1LoW/tbls
