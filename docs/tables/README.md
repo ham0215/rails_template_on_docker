@@ -4,6 +4,8 @@
 
 | Name | Columns | Comment | Type |
 | ---- | ------- | ------- | ---- |
+| [ar_internal_metadata](ar_internal_metadata.md) | 4 |  | BASE TABLE |
+| [schema_migrations](schema_migrations.md) | 1 |  | BASE TABLE |
 
 ## Relations
 
