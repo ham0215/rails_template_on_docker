@@ -14,11 +14,9 @@ jobs:
       DB_PORT: 33060
     services:
       db:
-        image: mysql:8.0.16
+        image: mysql:5.7.29
         ports:
           - 33060:3306
-        volumes:
-          - ./mysql-confd:/etc/mysql/conf.d
         env:
           MYSQL_USER: root
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
