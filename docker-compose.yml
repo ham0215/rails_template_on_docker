@@ -14,12 +14,17 @@ services:
     tty: true
     stdin_open: true
   db:
-    image: mysql:8.0.16
+    image: mysql:5.7.29
     volumes:
-      # Mysql8.0のデフォルトの認証形式をmysql_native_passwordにする
-      - ./mysql-confd:/etc/mysql/conf.d
       - db-volume:/var/lib/mysql
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+  tbls:
+    image: k1low/tbls:latest
+    volumes:
+      - .:/work
+    environment:
+      TBLS_DSN: mysql://root:@db:3306/app_test
+      TBLS_DOC_PATH: docs/tables
 volumes:
   db-volume:
