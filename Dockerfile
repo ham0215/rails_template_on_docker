@@ -1,3 +1,4 @@
+# syntax = docker/dockerfile:experimental
 FROM ruby:2.6.6
 
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
@@ -19,12 +20,14 @@ ENV LANG ja_JP.UTF-8
 RUN mkdir -p /app
 WORKDIR /app
 
-COPY Gemfile Gemfile.lock ./
+COPY Gemfile Gemfile.lock package.json yarn.lock ./
 
 RUN gem update bundler
-RUN bundle install
+RUN --mount=type=cache,target=/usr/local/bundle/cache bundle install
+RUN --mount=type=cache,target=/app/node_modules yarn install
+
 COPY . .
-RUN yarn install --check-files
+
 RUN bundle exec rails assets:precompile
 
 RUN rm -f /app/tmp/pids/server.pid
