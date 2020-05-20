@@ -20,10 +20,11 @@ ENV LANG ja_JP.UTF-8
 RUN mkdir -p /app
 WORKDIR /app
 
-COPY Gemfile Gemfile.lock package.json yarn.lock ./
-
+COPY Gemfile Gemfile.lock ./
 RUN gem update bundler
-RUN --mount=type=cache,target=/usr/local/bundle/cache bundle install
+RUN --mount=type=cache,target=/usr/local/bundle bundle install
+
+COPY package.json yarn.lock ./
 RUN --mount=type=cache,target=/app/node_modules yarn install
 
 COPY . .
