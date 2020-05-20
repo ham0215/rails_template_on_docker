@@ -1,4 +1,3 @@
-# syntax = docker/dockerfile:experimental
 FROM ruby:2.6.6
 
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
@@ -22,10 +21,10 @@ WORKDIR /app
 
 COPY Gemfile Gemfile.lock ./
 RUN gem update bundler
-RUN --mount=type=cache,target=/usr/local/bundle bundle install
+RUN bundle install
 
 COPY package.json yarn.lock ./
-RUN --mount=type=cache,target=/app/node_modules yarn install
+RUN yarn install
 
 COPY . .
 
