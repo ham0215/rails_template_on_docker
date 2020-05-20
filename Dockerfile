@@ -20,11 +20,14 @@ RUN mkdir -p /app
 WORKDIR /app
 
 COPY Gemfile Gemfile.lock ./
-
 RUN gem update bundler
 RUN bundle install
+
+COPY package.json yarn.lock ./
+RUN yarn install
+
 COPY . .
-RUN yarn install --check-files
+
 RUN bundle exec rails assets:precompile
 
 RUN rm -f /app/tmp/pids/server.pid
