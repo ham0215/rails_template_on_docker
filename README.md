@@ -6,10 +6,10 @@ rails template on docker.
 ![](https://github.com/ham0215/rails_template_on_docker/workflows/Ruby/badge.svg)
 
 ## ruby version
-2.6.5
+2.6.6
 
 ## rails version
-6.0.2.1
+6.0.3.1
 
 # initialize
 
