@@ -40,7 +40,7 @@ CREATE TABLE `ar_internal_metadata` (
 
 ## Relations
 
-![er](ar_internal_metadata.png)
+![er](ar_internal_metadata.svg)
 
 ---
 
