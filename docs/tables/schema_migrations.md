@@ -34,7 +34,7 @@ CREATE TABLE `schema_migrations` (
 
 ## Relations
 
-![er](schema_migrations.png)
+![er](schema_migrations.svg)
 
 ---
 
