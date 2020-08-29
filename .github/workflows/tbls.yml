@@ -24,7 +24,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2.3.2
       - name: Set up Ruby 2.6
-        uses: actions/setup-ruby@v1.0.2
+        uses: actions/setup-ruby@v1.1.1
         with:
           ruby-version: 2.6.x
       - name: apt-get
