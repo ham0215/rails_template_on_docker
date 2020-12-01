@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - 'feature/*'
+    paths:
+      - 'docs/tables/*'
+      - 'db/**'
 
 jobs:
   tbls:
