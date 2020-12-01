@@ -2,6 +2,9 @@ name: Ruby
 
 on:
   push:
+    branches:
+      - 'feature/*'
+      - master
     paths-ignore:
       - README.md
       - docs/**
@@ -26,10 +29,10 @@ jobs:
           BIND-ADDRESS: 0.0.0.0
     steps:
     - uses: actions/checkout@v2.3.4
-    - name: Set up Ruby 2.6
+    - name: Set up Ruby 2.7
       uses: actions/setup-ruby@v1.1.2
       with:
-        ruby-version: 2.6.x
+        ruby-version: 2.7.x
     - name: apt-get
       run: |
         sudo apt-get update
@@ -65,10 +68,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2.3.4
-    - name: Set up Ruby 2.6
+    - name: Set up Ruby 2.7
       uses: actions/setup-ruby@v1.1.2
       with:
-        ruby-version: 2.6.x
+        ruby-version: 2.7.x
     - name: run rubocop
       run: |
         gem install rubocop
@@ -78,10 +81,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2.3.4
-    - name: Set up Ruby 2.6
+    - name: Set up Ruby 2.7
       uses: actions/setup-ruby@v1.1.2
       with:
-        ruby-version: 2.6.x
+        ruby-version: 2.7.x
     - name: run brakeman
       run: |
         gem install brakeman
