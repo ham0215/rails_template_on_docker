@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails'
+gem 'rails', github: 'rails/rails'
 # Use mysql as the database for Active Record
 gem 'mysql2'
 # Use Puma as the app server
@@ -33,7 +33,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
   gem 'brakeman'
-  gem 'bullet'
+  # gem 'bullet'
   gem 'license_finder'
   gem 'rubocop'
 
