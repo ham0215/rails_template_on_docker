@@ -10,7 +10,7 @@ on:
 
 jobs:
   tbls:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     env:
       DB_HOST: 127.0.0.1
       DB_PORT: 33060
