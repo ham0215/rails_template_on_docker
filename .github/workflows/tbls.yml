@@ -10,9 +10,8 @@ on:
 
 jobs:
   tbls:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     env:
-      RAILS_ENV: test
       DB_HOST: 127.0.0.1
       DB_PORT: 33060
     services:
@@ -21,9 +20,9 @@ jobs:
         ports:
           - 33060:3306
         env:
-          MYSQL_USER: root
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
           BIND-ADDRESS: 0.0.0.0
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
       - uses: actions/checkout@v2.3.4
       - name: Set up Ruby 2.7
@@ -47,12 +46,12 @@ jobs:
           bundle install --jobs 4 --retry 3 --path vendor/bundle
       - name: migration
         run: |
-          bundle exec rake db:create
-          bundle exec rake db:test:prepare
+          bundle exec rails db:create
+          bundle exec rails db:migrate
       - name: tbls diff
         uses: docker://k1low/tbls:latest
         env:
-          TBLS_DSN: mysql://root:@db:3306/app_test
+          TBLS_DSN: mysql://root:@db:3306/app_development
           TBLS_DOC_PATH: docs/tables
         with:
           args: diff
