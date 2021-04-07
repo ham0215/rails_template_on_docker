@@ -31,5 +31,7 @@ module App
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.paths.add 'app/errors', eager_load: true
   end
 end
