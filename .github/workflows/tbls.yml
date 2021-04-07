@@ -12,7 +12,6 @@ jobs:
   tbls:
     runs-on: ubuntu-latest
     env:
-      RAILS_ENV: test
       DB_HOST: 127.0.0.1
       DB_PORT: 33060
     services:
@@ -53,7 +52,7 @@ jobs:
       - name: tbls diff
         uses: docker://k1low/tbls:latest
         env:
-          TBLS_DSN: mysql://root:@db:3306/app_test
+          TBLS_DSN: mysql://root:@db:3306/app_development
           TBLS_DOC_PATH: docs/tables
         with:
           args: diff
