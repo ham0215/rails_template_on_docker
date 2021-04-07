@@ -34,10 +34,6 @@ jobs:
       with:
         ruby-version: 2.7.2
         bundler-cache: true
-    - name: apt-get
-      run: |
-        sudo apt-get update
-        sudo apt-get install libmysqlclient-dev
     - name: Cache node modules
       uses: actions/cache@preview
       with:
