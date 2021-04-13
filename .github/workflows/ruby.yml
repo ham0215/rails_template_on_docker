@@ -35,7 +35,7 @@ jobs:
         ruby-version: 2.7.2
         bundler-cache: true
     - name: Cache node modules
-      uses: actions/cache@v2.1.4
+      uses: actions/cache@v2.1.5
       with:
         path: node_modules
         key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
